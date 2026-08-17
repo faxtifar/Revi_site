@@ -1,5 +1,6 @@
-# Revi site — проверка live TikTok
+# Revi + Shadoww — исправление GitHub Pages
 
-- [ ] Открыть опубликованный сайт и пролистать до блока социальных ссылок.
-- [ ] Проверить, что на экране отображается @revi_robloxer.
-- [ ] Сверить результат с live bundle и сообщить пользователю.
+- [ ] Проверить live HTML и asset paths Revi.
+- [ ] Проверить live HTML и asset paths Shadoww.
+- [ ] Исправить base path и корневую static-сборку обоих сайтов.
+- [ ] Отправить commits и проверить обе live-страницы.
