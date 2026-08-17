@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+:root {
+  --background: #faf5ff;
+  --foreground: #2e1065;
+  --primary: #8b5cf6;
+}
+
+body {
+  margin: 0;
+  background-color: #faf5ff;
+  color: #2e1065;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+.lavender-card {
+  background: #ffffff;
+  border: 1px solid #e9d5ff;
+  box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.08), 0 8px 10px -6px rgba(139, 92, 246, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lavender-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 30px -10px rgba(139, 92, 246, 0.15);
+}

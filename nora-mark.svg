@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Nora mark">
+  <rect width="120" height="120" rx="8" fill="#151418"/>
+  <path d="M31 83V37l29 33V37h13v46L44 50v33H31Z" fill="#fffdfb"/>
+  <circle cx="82" cy="33" r="10" fill="#f22978"/>
+  <path d="M83 17v32M67 33h32" stroke="#f22978" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+</svg>
