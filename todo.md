@@ -1,5 +1,5 @@
-# Revi site — исправление TikTok
+# Revi site — правильный TikTok
 
-- [ ] Найти все упоминания и ссылки на текущий TikTok-аккаунт.
-- [ ] Заменить их на настоящий @revi_roblox и tiktok.com/@revi_roblox.
-- [ ] Проверить сборку и отправить исправление в GitHub.
+- [ ] Найти все старые упоминания @revi_roblox.
+- [ ] Заменить их на @revi_robloxer и tiktok.com/@revi_robloxer.
+- [ ] Пересобрать и проверить live GitHub Pages.

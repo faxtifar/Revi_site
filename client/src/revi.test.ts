@@ -6,8 +6,8 @@ const homeSource = fs.readFileSync(path.resolve(__dirname, "pages/Home.tsx"), "u
 
 describe("Revi social links", () => {
   it("marks the real TikTok profile", () => {
-    expect(homeSource).toContain('https://www.tiktok.com/@revi_roblox');
-    expect(homeSource).toContain('@revi_roblox');
+    expect(homeSource).toContain('https://www.tiktok.com/@revi_robloxer');
+    expect(homeSource).toContain('@revi_robloxer');
     expect(homeSource).not.toContain('@shadoww7682');
   });
 });
