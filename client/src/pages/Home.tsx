@@ -12,21 +12,21 @@ const archive = [
     number: "01",
     title: "Сердца на связи",
     note: "чуть драматично, зато честно",
-    image: "/manus-storage/revi-world_141931d4.png",
+    image: "/Revi_site/assets/revi-world_141931d4.png",
     tone: "cream",
   },
   {
     number: "02",
     title: "Скрам в лобби",
     note: "дорого — не значит безопасно",
-    image: "/manus-storage/revi-live_7ea8dbc4.png",
+    image: "/Revi_site/assets/revi-live_7ea8dbc4.png",
     tone: "red",
   },
   {
     number: "03",
     title: "Играем до эфира",
     note: "заходи, пока сервер не упал",
-    image: "/manus-storage/revi-hero_fbdeb0d4.png",
+    image: "/Revi_site/assets/revi-hero_fbdeb0d4.png",
     tone: "ink",
   },
 ];
@@ -47,7 +47,7 @@ export default function Home() {
     <main className="site-shell">
       <header className="site-header">
         <a className="brand" href="#top" onClick={closeMenu} aria-label="Revi — на главную">
-          <span className="brand-mark" aria-hidden="true"><img src="/manus-storage/revi-mark_cbe4dfbe.png" alt="" /></span>
+          <span className="brand-mark" aria-hidden="true"><img src="/Revi_site/assets/revi-mark_cbe4dfbe.png" alt="" /></span>
           <span className="brand-name">revi</span>
         </a>
         <nav className={menuOpen ? "main-nav is-open" : "main-nav"} aria-label="Основная навигация">
@@ -76,7 +76,7 @@ export default function Home() {
           <div className="hero-footnote"><span className="scribble">↳</span> 56,7 тыс. лайков и цель — 10к своих</div>
         </div>
         <div className="hero-visual">
-          <div className="hero-image-wrap"><img src="/manus-storage/revi-hero_fbdeb0d4.png" alt="Белокосый аватар Revi в игровом мире" /></div>
+          <div className="hero-image-wrap"><img src="/Revi_site/assets/revi-hero_fbdeb0d4.png" alt="Белокосый аватар Revi в игровом мире" /></div>
           <div className="hero-sticker sticker-live"><i /> LIVE<br /><small>иногда внезапно</small></div>
           <div className="hero-sticker sticker-note">не Revi,<br />а Реви <span>♡</span></div>
           <div className="side-caption">scroll to explore<br /><span>↓</span></div>
