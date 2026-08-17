@@ -32,8 +32,8 @@ const archive = [
 ];
 
 const socials = [
+  { label: "TikTok / настоящий профиль", handle: "@revi_roblox", href: "https://www.tiktok.com/@revi_roblox", icon: Play },
   { label: "Telegram", handle: "revi_roblox", href: "https://t.me/revi_roblox", icon: Send },
-  { label: "TikTok", handle: "@revi_roblox", href: "https://www.tiktok.com/@revi_roblox", icon: Play },
   { label: "Instagram", handle: "revi_roblox", href: "https://www.instagram.com/revi_roblox/", icon: Instagram },
 ];
 
@@ -73,7 +73,7 @@ export default function Home() {
             <a className="button button-red" href="#live">Зайти на эфир <ArrowUpRight size={17} /></a>
             <a className="text-link" href="#about">Узнать меня <span>↓</span></a>
           </div>
-          <div className="hero-footnote"><span className="scribble">↳</span> 56,7 тыс. лайков и цель — 10к своих</div>
+          <div className="hero-footnote"><span className="scribble">↳</span> TikTok / @revi_roblox · 56,7 тыс. лайков</div>
         </div>
         <div className="hero-visual">
           <div className="hero-image-wrap"><img src="/Revi_site/assets/revi-hero_fbdeb0d4.png" alt="Белокосый аватар Revi в игровом мире" /></div>
@@ -95,7 +95,7 @@ export default function Home() {
       <section className="archive-section" id="archive">
         <div className="section-label light"><span>03</span><b>selected archive</b></div>
         <div className="archive-heading"><div><p className="kicker">из последних приключений</p><h2>Не просто<br /><em>контент.</em></h2></div><div className="archive-intro"><p>Три маленьких доказательства того, что в лобби всегда происходит больше, чем обещает описание игры.</p><div className="tab-row"><button className={activeTab === "archive" ? "active" : ""} onClick={() => setActiveTab("archive")}>архив</button><button className={activeTab === "notes" ? "active" : ""} onClick={() => setActiveTab("notes")}>заметки</button></div></div></div>
-        {activeTab === "archive" ? <div className="archive-list">{archive.map((item, index) => <article className={`archive-card tone-${item.tone}`} key={item.number}><div className="card-meta"><span>{item.number}</span><span>{index === 1 ? "LIVE CUT" : "ROBLOX LOG"}</span></div><div className="archive-image"><img src={item.image} alt={item.title} /><span className="play-icon"><Play size={17} fill="currentColor" /></span></div><h3>{item.title}</h3><p>{item.note}</p><a href="https://www.tiktok.com/@revi_roblox" target="_blank" rel="noreferrer">смотреть фрагмент <ArrowUpRight size={14} /></a></article>)}</div> : <div className="notes-card"><span className="note-quote">“</span><p>Иногда я захожу просто на пять минут. Потом уже ночь, новый сервер и кто-то кричит: «Реви, ты опять это сделала».</p><span className="note-sign">— заметка из лобби, 2026</span></div>}
+        {activeTab === "archive" ? <div className="archive-list">{archive.map((item, index) => <article className={`archive-card tone-${item.tone}`} key={item.number}><div className="card-meta"><span>{item.number}</span><span>{index === 1 ? "LIVE CUT" : "ROBLOX LOG"}</span></div><div className="archive-image"><img src={item.image} alt={item.title} /><span className="play-icon"><Play size={17} fill="currentColor" /></span></div><h3>{item.title}</h3><p>{item.note}</p><a href="https://www.tiktok.com/@revi_roblox" target="_blank" rel="noreferrer">смотреть у @revi_roblox <ArrowUpRight size={14} /></a></article>)}</div> : <div className="notes-card"><span className="note-quote">“</span><p>Иногда я захожу просто на пять минут. Потом уже ночь, новый сервер и кто-то кричит: «Реви, ты опять это сделала».</p><span className="note-sign">— заметка из лобби, 2026</span></div>}
       </section>
 
       <section className="live-section section-rule" id="live">
