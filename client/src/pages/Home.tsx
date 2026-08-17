@@ -1,324 +1,115 @@
-// STYLE NOTE: Revi's page in handmade scrapbook / zine style.
-// Features asymmetric layout, handwritten accents, lavender marker details, and real TikTok assets.
-
+/*
+ * Pixel Diary style note:
+ * This page treats Revi as a person and creator, not as a social-feed clone.
+ * Keep the editorial asymmetry, paper-like spacing, strawberry-red annotations,
+ * and warm human voice intact when extending the page.
+ */
 import { useState } from "react";
-import { 
-  Heart, 
-  ArrowUpRight, 
-  Sparkles, 
-  Radio, 
-  Send, 
-  ChevronRight,
-  Eye,
-  Calendar
-} from "lucide-react";
+import { ArrowUpRight, ChevronDown, Instagram, Menu, Play, Send, X } from "lucide-react";
 
-const assets = {
-  avatar: `${import.meta.env.BASE_URL}assets/revi-avatar.jpg`,
-  post1: `${import.meta.env.BASE_URL}assets/revi-post-1.jpg`,
-  post2: `${import.meta.env.BASE_URL}assets/revi-post-2.jpg`,
-  post3: `${import.meta.env.BASE_URL}assets/revi-post-3.jpg`,
-};
+const archive = [
+  {
+    number: "01",
+    title: "Сердца на связи",
+    note: "чуть драматично, зато честно",
+    image: "/manus-storage/revi-world_141931d4.png",
+    tone: "cream",
+  },
+  {
+    number: "02",
+    title: "Скрам в лобби",
+    note: "дорого — не значит безопасно",
+    image: "/manus-storage/revi-live_7ea8dbc4.png",
+    tone: "red",
+  },
+  {
+    number: "03",
+    title: "Играем до эфира",
+    note: "заходи, пока сервер не упал",
+    image: "/manus-storage/revi-hero_fbdeb0d4.png",
+    tone: "ink",
+  },
+];
+
+const socials = [
+  { label: "Telegram", handle: "revi_roblox", href: "https://t.me/revi_roblox", icon: Send },
+  { label: "TikTok", handle: "@revi_roblox", href: "https://www.tiktok.com/@revi_roblox", icon: Play },
+  { label: "Instagram", handle: "revi_roblox", href: "https://www.instagram.com/revi_roblox/", icon: Instagram },
+];
 
 export default function Home() {
-  const [likes, setLikes] = useState({ 1: 342, 2: 419, 3: 528 });
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("archive");
 
-  const toggleLike = (id: number) => {
-    setLikes(prev => ({ ...prev, [id]: prev[id as keyof typeof prev] + 1 }));
-  };
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setSubscribed(true);
-      setEmail("");
-    }
-  };
+  const closeMenu = () => setMenuOpen(false);
 
   return (
-    <div className="site-shell" id="top">
-      {/* Header */}
-      <header className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between border-b border-[#ddd6fe]">
-        <a href="#top" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-[#8b5cf6] text-white font-black grid place-content-center shadow-[3px_3px_0_#1f1726]">
-            R
-          </div>
-          <span className="font-black text-xl tracking-tight text-[#1f1726]">
-            реви <span className="text-[#8b5cf6]">🤍</span>
-          </span>
+    <main className="site-shell">
+      <header className="site-header">
+        <a className="brand" href="#top" onClick={closeMenu} aria-label="Revi — на главную">
+          <span className="brand-mark" aria-hidden="true"><img src="/manus-storage/revi-mark_cbe4dfbe.png" alt="" /></span>
+          <span className="brand-name">revi</span>
         </a>
-
-        <nav className="hidden md:flex items-center gap-8 text-xs font-bold tracking-widest uppercase text-[#6b21a8]">
-          <a href="#about" className="hover:text-[#8b5cf6] transition-colors">обо мне</a>
-          <a href="#posts" className="hover:text-[#8b5cf6] transition-colors">моменты</a>
-          <a href="#live" className="hover:text-[#8b5cf6] transition-colors">эфир</a>
+        <nav className={menuOpen ? "main-nav is-open" : "main-nav"} aria-label="Основная навигация">
+          <a href="#about" onClick={closeMenu}>about</a>
+          <a href="#archive" onClick={closeMenu}>архив</a>
+          <a href="#live" onClick={closeMenu}>эфир</a>
+          <a href="#links" onClick={closeMenu}>связь</a>
         </nav>
-
-        <a 
-          href="https://www.tiktok.com/@revi_robloxer" 
-          target="_blank" 
-          rel="noreferrer"
-          className="bg-[#1f1726] text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider shadow-[4px_4px_0_#8b5cf6] hover:bg-[#8b5cf6] hover:shadow-[4px_4px_0_#1f1726] transition-all"
-        >
-          TikTok ↗
-        </a>
+        <div className="header-actions">
+          <span className="status-pill"><i /> сейчас онлайн</span>
+          <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}>
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-6 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div className="lg:col-span-7 space-y-6">
-          <div className="inline-flex items-center gap-2 bg-[#f3e8ff] border border-[#8b5cf6] px-4 py-1.5 rounded-full text-xs font-extrabold text-[#6d28d9] transform -rotate-1">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>не рЕви, а рЭви 🤍</span>
+      <section className="hero" id="top">
+        <div className="hero-copy">
+          <p className="eyebrow"><span>01</span> creator / roblox / ru</p>
+          <h1>Игры,<br /><em>характер</em><br />и немного скрама.</h1>
+          <p className="hero-lede">Я — Revi. Строю странные миры, нахожу своих людей и превращаю каждый заход в историю, которую хочется досмотреть.</p>
+          <div className="hero-actions">
+            <a className="button button-red" href="#live">Зайти на эфир <ArrowUpRight size={17} /></a>
+            <a className="text-link" href="#about">Узнать меня <span>↓</span></a>
           </div>
-
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.05] text-[#1f1726]">
-            мир <span className="bg-[#8b5cf6] text-white px-3 py-1 rounded-2xl inline-block transform rotate-1">роблокса</span>
-            <br />
-            и мои эфиры
-          </h1>
-
-          <p className="text-base sm:text-lg text-[#581c87] max-w-lg leading-relaxed">
-            Привет! Я Реви. Собираю здесь лучшие моменты, полезные фишки, правила игры на «follow» и всё, чем делюсь в TikTok и Telegram.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-4 pt-2">
-            <a 
-              href="#posts"
-              className="bg-[#8b5cf6] text-white px-7 py-3.5 rounded-2xl font-black text-sm shadow-[5px_5px_0_#1f1726] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all flex items-center gap-2"
-            >
-              <span>смотреть моменты</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
-            <a 
-              href="https://t.me/revi_roblox"
-              target="_blank"
-              rel="noreferrer"
-              className="bg-white text-[#1f1726] border-2 border-[#1f1726] px-6 py-3.5 rounded-2xl font-black text-sm shadow-[4px_4px_0_#1f1726] hover:bg-[#f3e8ff] transition-all"
-            >
-              Telegram: Ревишка 🌸
-            </a>
-          </div>
+          <div className="hero-footnote"><span className="scribble">↳</span> 56,7 тыс. лайков и цель — 10к своих</div>
         </div>
-
-        {/* Hero Visual Card */}
-        <div className="lg:col-span-5 relative flex justify-center">
-          <div className="absolute -inset-4 bg-[#8b5cf6]/10 rounded-3xl transform rotate-3 -z-10" />
-          <div className="paper-card p-4 rounded-3xl max-w-sm w-full transform -rotate-2 hover:rotate-0 transition-transform">
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/4.5] bg-[#f3e8ff]">
-              <img 
-                src={assets.avatar} 
-                alt="Реви" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute top-3 left-3 bg-[#8b5cf6] text-white px-3 py-1 rounded-full text-xs font-bold shadow">
-                ЭФИР ⚡
-              </div>
-            </div>
-            <div className="mt-4 px-2 flex items-center justify-between text-xs font-black text-[#1f1726]">
-              <span>@revi_robloxer</span>
-              <span className="text-[#8b5cf6]">4,216 подписчиков</span>
-            </div>
-          </div>
+        <div className="hero-visual">
+          <div className="hero-image-wrap"><img src="/manus-storage/revi-hero_fbdeb0d4.png" alt="Белокосый аватар Revi в игровом мире" /></div>
+          <div className="hero-sticker sticker-live"><i /> LIVE<br /><small>иногда внезапно</small></div>
+          <div className="hero-sticker sticker-note">не Revi,<br />а Реви <span>♡</span></div>
+          <div className="side-caption">scroll to explore<br /><span>↓</span></div>
         </div>
       </section>
 
-      {/* About / Profile Info Section */}
-      <section id="about" className="max-w-7xl mx-auto px-6 py-16 border-t border-[#ddd6fe]">
-        <div className="flex items-center justify-between mb-8">
-          <div className="text-xs font-extrabold uppercase tracking-widest text-[#6d28d9]">02 / обо мне и правила</div>
+      <section className="about-section section-rule" id="about">
+        <div className="section-label"><span>02</span><b>about me</b></div>
+        <div className="about-grid">
+          <div className="about-intro"><p className="kicker">маленькая заметка</p><h2>В интернете я<br /><em>немного громче.</em></h2></div>
+          <div className="about-text"><p>Реви — это не идеальный аватар и не вылизанный профиль. Это смешные решения, странные находки, Roblox, где всегда что-то идёт не по плану, и люди, с которыми хочется остаться ещё на одну игру.</p><p className="muted">Если ты пришёл впервые — считай, мы уже познакомились.</p><a className="arrow-link" href="#links">найти меня в сети <ArrowUpRight size={15} /></a></div>
         </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          <div className="lg:col-span-6 paper-card p-8 rounded-3xl flex flex-col justify-between space-y-6">
-            <div className="space-y-4">
-              <h2 className="text-2xl font-black text-[#1f1726]">Как поиграть со мной? ✨</h2>
-              <p className="text-sm text-[#581c87] leading-relaxed">
-                Реви 🤍 (не рЕви, а рЭви). Мой ник в Роблоксе: <strong className="text-[#1f1726] bg-[#f3e8ff] px-2 py-0.5 rounded">rev1o00r</strong> — заходим на стримы и играем через follow!
-              </p>
-              <p className="text-sm text-[#581c87] leading-relaxed">
-                Цель канала: <strong className="text-[#1f1726]">10k звезд</strong> ⭐. Основной тгк: <a href="https://t.me/revi_roblox" target="_blank" rel="noreferrer" className="text-[#8b5cf6] underline font-bold">revi_roblox / Ревишка</a>.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-[#ddd6fe] flex items-center justify-between text-xs font-bold text-[#6d28d9]">
-              <span>TikTok: @revi_robloxer</span>
-              <span>Лапки вверх! 🐾</span>
-            </div>
-          </div>
-
-          <div className="lg:col-span-6 grid grid-cols-2 gap-4">
-            <div className="paper-card p-6 rounded-3xl flex flex-col justify-between bg-[#fff]">
-              <span className="text-xs font-bold text-[#6d28d9] uppercase">Роблокс ник</span>
-              <span className="text-xl font-black text-[#1f1726] mt-2">rev1o00r</span>
-              <span className="text-[10px] text-purple-400 mt-1">играем на follow</span>
-            </div>
-            <div className="paper-card p-6 rounded-3xl flex flex-col justify-between bg-[#fff]">
-              <span className="text-xs font-bold text-[#6d28d9] uppercase">Цель канала</span>
-              <span className="text-xl font-black text-[#1f1726] mt-2">10k ⭐</span>
-              <span className="text-[10px] text-purple-400 mt-1">стремимся вместе</span>
-            </div>
-            <div className="paper-card p-6 rounded-3xl flex flex-col justify-between bg-[#fff]">
-              <span className="text-xs font-bold text-[#6d28d9] uppercase">Telegram</span>
-              <span className="text-base font-black text-[#1f1726] mt-2">revi_roblox</span>
-              <span className="text-[10px] text-purple-400 mt-1">официальный канал</span>
-            </div>
-            <div className="paper-card p-6 rounded-3xl flex flex-col justify-between bg-[#fff]">
-              <span className="text-xs font-bold text-[#6d28d9] uppercase">Статус</span>
-              <span className="text-base font-black text-[#1f1726] mt-2">Актив 🌸</span>
-              <span className="text-[10px] text-purple-400 mt-1">видео и эфиры</span>
-            </div>
-          </div>
-        </div>
+        <div className="stats-strip"><div><strong>104</strong><span>подписки</span></div><div><strong>4 216</strong><span>подписчиков</span></div><div><strong>56,7k</strong><span>лайков</span></div><div className="stat-note">цель<br /><b>10k</b> <span>✶</span></div></div>
       </section>
 
-      {/* Posts / Moments Section */}
-      <section id="posts" className="max-w-7xl mx-auto px-6 py-16 border-t border-[#ddd6fe]">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-10 gap-4">
-          <div>
-            <div className="text-xs font-extrabold uppercase tracking-widest text-[#6d28d9]">03 / моменты из TikTok</div>
-            <h2 className="text-3xl font-black text-[#1f1726] mt-1">Последние ролики 🌸</h2>
-          </div>
-          <a 
-            href="https://www.tiktok.com/@revi_robloxer" 
-            target="_blank" 
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-black text-[#8b5cf6] hover:text-[#6d28d9] transition-colors"
-          >
-            <span>Смотреть все в TikTok</span>
-            <ChevronRight className="w-4 h-4" />
-          </a>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          
-          {/* Post 1 */}
-          <div className="paper-card rounded-3xl overflow-hidden flex flex-col justify-between">
-            <div>
-              <div className="relative aspect-video bg-[#f3e8ff] overflow-hidden border-b border-[#ddd6fe]">
-                <img src={assets.post1} alt="Пост 1" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-                <span className="absolute top-3 left-3 bg-[#1f1726] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
-                  Жизнь
-                </span>
-              </div>
-              <div className="p-6 space-y-3">
-                <h3 className="text-xl font-black text-[#1f1726] leading-snug">сердца на связи (часть 1)</h3>
-                <p className="text-xs text-[#581c87] leading-relaxed">Теплые моменты, общение с подписчиками и классные эмоции на стримах.</p>
-              </div>
-            </div>
-            <div className="px-6 pb-6 pt-2 flex items-center justify-between border-t border-[#ddd6fe] text-xs font-bold text-[#6d28d9]">
-              <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> 17.08.2026</span>
-              <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5" /> 444</span>
-              <button 
-                onClick={() => toggleLike(1)}
-                className="flex items-center gap-1 text-[#8b5cf6] hover:scale-110 transition-transform cursor-pointer"
-              >
-                <Heart className="w-4 h-4 fill-[#8b5cf6]" />
-                <span>{likes[1]}</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Post 2 */}
-          <div className="paper-card rounded-3xl overflow-hidden flex flex-col justify-between">
-            <div>
-              <div className="relative aspect-video bg-[#f3e8ff] overflow-hidden border-b border-[#ddd6fe]">
-                <img src={assets.post2} alt="Пост 2" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-                <span className="absolute top-3 left-3 bg-[#1f1726] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
-                  Роблокс
-                </span>
-              </div>
-              <div className="p-6 space-y-3">
-                <h3 className="text-xl font-black text-[#1f1726] leading-snug">везде очень дорого..</h3>
-                <p className="text-xs text-[#581c87] leading-relaxed">Обзор цен, трендов и интересные ситуации в любимых режимах.</p>
-              </div>
-            </div>
-            <div className="px-6 pb-6 pt-2 flex items-center justify-between border-t border-[#ddd6fe] text-xs font-bold text-[#6d28d9]">
-              <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> 16.08.2026</span>
-              <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5" /> 322</span>
-              <button 
-                onClick={() => toggleLike(2)}
-                className="flex items-center gap-1 text-[#8b5cf6] hover:scale-110 transition-transform cursor-pointer"
-              >
-                <Heart className="w-4 h-4 fill-[#8b5cf6]" />
-                <span>{likes[2]}</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Post 3 */}
-          <div className="paper-card rounded-3xl overflow-hidden flex flex-col justify-between">
-            <div>
-              <div className="relative aspect-video bg-[#f3e8ff] overflow-hidden border-b border-[#ddd6fe]">
-                <img src={assets.post3} alt="Пост 3" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-                <span className="absolute top-3 left-3 bg-[#1f1726] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
-                  Важно
-                </span>
-              </div>
-              <div className="p-6 space-y-3">
-                <h3 className="text-xl font-black text-[#1f1726] leading-snug">виды скам на которые все ведутся</h3>
-                <p className="text-xs text-[#581c87] leading-relaxed">Разбор безопасности, честные сделки и советы для игроков.</p>
-              </div>
-            </div>
-            <div className="px-6 pb-6 pt-2 flex items-center justify-between border-t border-[#ddd6fe] text-xs font-bold text-[#6d28d9]">
-              <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> 15.08.2026</span>
-              <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5" /> 506</span>
-              <button 
-                onClick={() => toggleLike(3)}
-                className="flex items-center gap-1 text-[#8b5cf6] hover:scale-110 transition-transform cursor-pointer"
-              >
-                <Heart className="w-4 h-4 fill-[#8b5cf6]" />
-                <span>{likes[3]}</span>
-              </button>
-            </div>
-          </div>
-
-        </div>
+      <section className="archive-section" id="archive">
+        <div className="section-label light"><span>03</span><b>selected archive</b></div>
+        <div className="archive-heading"><div><p className="kicker">из последних приключений</p><h2>Не просто<br /><em>контент.</em></h2></div><div className="archive-intro"><p>Три маленьких доказательства того, что в лобби всегда происходит больше, чем обещает описание игры.</p><div className="tab-row"><button className={activeTab === "archive" ? "active" : ""} onClick={() => setActiveTab("archive")}>архив</button><button className={activeTab === "notes" ? "active" : ""} onClick={() => setActiveTab("notes")}>заметки</button></div></div></div>
+        {activeTab === "archive" ? <div className="archive-list">{archive.map((item, index) => <article className={`archive-card tone-${item.tone}`} key={item.number}><div className="card-meta"><span>{item.number}</span><span>{index === 1 ? "LIVE CUT" : "ROBLOX LOG"}</span></div><div className="archive-image"><img src={item.image} alt={item.title} /><span className="play-icon"><Play size={17} fill="currentColor" /></span></div><h3>{item.title}</h3><p>{item.note}</p><a href="https://www.tiktok.com/@revi_roblox" target="_blank" rel="noreferrer">смотреть фрагмент <ArrowUpRight size={14} /></a></article>)}</div> : <div className="notes-card"><span className="note-quote">“</span><p>Иногда я захожу просто на пять минут. Потом уже ночь, новый сервер и кто-то кричит: «Реви, ты опять это сделала».</p><span className="note-sign">— заметка из лобби, 2026</span></div>}
       </section>
 
-      {/* Live / Telegram Banner */}
-      <section id="live" className="max-w-7xl mx-auto px-6 py-12">
-        <div className="bg-[#1f1726] text-white rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-[8px_8px_0_#8b5cf6]">
-          <div className="space-y-3 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 bg-[#8b5cf6] px-3 py-1 rounded-full text-xs font-black">
-              <Radio className="w-3.5 h-3.5 animate-pulse" />
-              <span>ТЕЛЕГРАМ КАНАЛ</span>
-            </div>
-            <h3 className="text-2xl md:text-3xl font-black">Ревишка на связи 🌸</h3>
-            <p className="text-sm text-purple-200 max-w-md">Подпишись на Telegram-канал <code className="bg-white/10 px-2 py-0.5 rounded text-purple-200">revi_roblox</code>, чтобы первыми узнавать о стримах и новых видео!</p>
-          </div>
-
-          <a 
-            href="https://t.me/revi_roblox"
-            target="_blank"
-            rel="noreferrer"
-            className="bg-[#8b5cf6] text-white px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-wider shadow-[4px_4px_0_#fff] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all flex items-center gap-2"
-          >
-            <span>перейти в тгк</span>
-            <Send className="w-4 h-4" />
-          </a>
-        </div>
+      <section className="live-section section-rule" id="live">
+        <div className="section-label"><span>04</span><b>next live</b></div>
+        <div className="live-card"><div className="live-copy"><div className="live-badge"><i /> эфир открыт</div><h2>Залетай,<br /><em>место есть.</em></h2><p>Подпишись, чтобы не пропустить следующий заход. Будем играть, спорить с картой и делать вид, что всё было по плану.</p><a className="button button-red" href="https://t.me/revi_roblox" target="_blank" rel="noreferrer">Напомнить мне <Send size={16} /></a></div><div className="live-details"><span>канал</span><strong>@revi_roblox</strong><span>формат</span><strong>roblox / разговоры / хаос</strong><span>статус</span><strong className="red-text">когда-нибудь сегодня <i className="tiny-dot" /></strong></div></div>
       </section>
 
-      {/* Footer */}
-      <footer className="max-w-7xl mx-auto px-6 py-16 mt-16 border-t border-[#ddd6fe]">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-          <div>
-            <span className="font-black text-xl text-[#1f1726] block">реви 🤍</span>
-            <p className="text-xs text-[#6d28d9] mt-2">Спасибо, что заглянул(а)! Люблю каждого из вас ✨</p>
-          </div>
-          <div className="flex items-center justify-center gap-6 text-xs font-black uppercase tracking-wider text-[#6d28d9]">
-            <a href="https://www.tiktok.com/@revi_robloxer" target="_blank" rel="noreferrer" className="hover:text-[#1f1726]">TikTok</a>
-            <a href="https://t.me/revi_roblox" target="_blank" rel="noreferrer" className="hover:text-[#1f1726]">Telegram</a>
-            <a href="#top" className="hover:text-[#1f1726]">Наверх ↑</a>
-          </div>
-          <div className="text-right text-xs text-purple-400">
-            © 2026 Реви · Handmade zine style
-          </div>
-        </div>
-      </footer>
+      <section className="links-section" id="links">
+        <div className="section-label"><span>05</span><b>stay close</b></div>
+        <div className="links-heading"><h2>Оставайся<br /><em>на связи.</em></h2><p>Там появляются эфиры, новые странные находки и всё, что не помещается в один ролик.</p></div>
+        <div className="social-list">{socials.map(({ label, handle, href, icon: Icon }) => <a className="social-row" href={href} target="_blank" rel="noreferrer" key={label}><span className="social-icon"><Icon size={18} /></span><span><small>{label}</small><strong>{handle}</strong></span><ArrowUpRight className="social-arrow" size={20} /></a>)}</div>
+      </section>
 
-    </div>
+      <footer className="site-footer"><span>revi / 2026</span><span>сделано с сердцем и одной открытой вкладкой</span><a href="#top">наверх ↑</a></footer>
+    </main>
   );
 }
